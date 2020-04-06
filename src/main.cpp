@@ -6,7 +6,7 @@
 
 #define SONAR_NUM 2      // Number of sensors.
 #define MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
-const byte TRANS_ARR[] = {D5,D6};
+const byte TRANS_ARR[] = {D5,D6}; //Transistors array used to turn off sensors while not using them
 
 NewPing sonar[SONAR_NUM] = {   // Sensor object array.
   NewPing(D1, D2, MAX_DISTANCE), // Each sensor's trigger pin, echo pin, and max distance to ping. 
@@ -22,10 +22,10 @@ void setup() {
 }
 
 void loop() { 
-  for (uint8_t i = 0; i < SONAR_NUM-1; i++) {
+  for (uint8_t i = 0; i < SONAR_NUM; i++) { //Turns on sensors
         digitalWrite(TRANS_ARR[i], HIGH);
   }
-  for (uint8_t i = 0; i < SONAR_NUM-1; i++) { // Loop through each sensor and display results.
+  for (uint8_t i = 0; i < SONAR_NUM; i++) { // Loop through each sensor and display results.
     delay(50); // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
     digitalWrite(TRANS_ARR[i], HIGH);
     delay(5000);
@@ -36,7 +36,7 @@ void loop() {
     digitalWrite(TRANS_ARR[i], LOW);
   }
   Serial.println();
-  for (uint8_t i = 0; i < SONAR_NUM-1; i++) {
+  for (uint8_t i = 0; i < SONAR_NUM; i++) { //Turns of sensors
         digitalWrite(TRANS_ARR[i], LOW);
   }
 }
